@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Don't forget the trailing / on the source directory - if you omit it,
+# it will copy the directory over, rather than just its contents.
+export DEPLOY_SCRIPT_DIR=/var/www/html/scripts/
+export DEPLOY_SOURCE_DIR=/var/www/html/template/EIP/
+export DEPLOY_DEST_DIR=/livebricks/livebricks/test/
+export DEPLOY_SERVER=54.64.86.74
+export DEPLOY_ACCOUNT=administrator
+export DEPLOY_KEY=

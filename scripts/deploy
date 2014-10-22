@@ -1,0 +1,41 @@
+#!/bin/bash
+
+
+# SCRIPT
+# ------------------------------------------
+source ../scripts/environment_$@
+
+APPLICATION_PATH="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && cd ${DEPLOY_SOURCE_DIR} && pwd )"
+cd "$APPLICATION_PATH"
+
+# show project rsync-exclude list
+echo "<<<                    Deploy Information                     >>>"
+echo ""
+echo "========================= Ignore Files =========================="
+cat ${DEPLOY_SCRIPT_DIR}rsync-exclude_$@
+echo ""
+echo "========================= Upload Files =========================="
+
+# Git deploy
+unset GIT_DIR
+git pull
+#git fetch origin
+#git reset --hard origin/master
+echo ""
+
+# Other post-deploy changes
+# find . -type d -exec chmod 755 {} \;
+# find . -type f -exec chmod 644 {} \;
+
+if [ "$DEPLOY_KEY" == "" ]; then
+    # access by tediously typing a password over and again
+    # delete files
+    #rsync --chmod=ug=rwX -e ssh -axv --delete --exclude-from=$DEPLOY_SCRIPT_DIR/rsync-exclude_$@ \
+    # not delete files
+    rsync --chmod=ug=rwX -e ssh -axv --exclude-from=$DEPLOY_SCRIPT_DIR/rsync-exclude_$@ \
+    $DEPLOY_SOURCE_DIR $DEPLOY_ACCOUNT@$DEPLOY_SERVER:$DEPLOY_DEST_DIR
+else
+    # access by key
+    rsync --chmod=ug=rwX -axv --delete --exclude-from=$DEPLOY_SCRIPT_DIR/rsync-exclude \ -e "ssh -i $DEPLOY_KEY" \
+    $DEPLOY_SOURCE_DIR $DEPLOY_ACCOUNT@$DEPLOY_SERVER:$DEPLOY_DEST_DIR
+fi

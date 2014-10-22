@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+# SCRIPT
+# ------------------------------------------
+
+APPLICATION_PATH="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && cd ../gitflow && pwd )"
+cd "$APPLICATION_PATH"
+git log --stat --summary --pretty=format:'%h : %s' --date-order  --graph  # -1 --format=medium

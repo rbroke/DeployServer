@@ -1,0 +1,6 @@
+*.svn
+.git
+.gitignore
+.project
+.settings
+Connections

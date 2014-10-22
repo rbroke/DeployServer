@@ -1,0 +1,9 @@
+{
+    "accounts"  : [
+        {"account": "indexplates", "password": "indexplates", "workspace": "indexplates", "location": "frontend"  },
+        {"account": "liveplates", "password": "liveplates", "workspace": "liveplates", "location": "frontend" },
+        {"account": "official", "password": "official", "workspace": "official", "location": "frontend" },
+        {"account": "finance", "password": "finance", "workspace": "official", "location": "backend" },
+        {"account": "test", "password": "test", "workspace": "template", "location": "frontend" }
+    ]
+}

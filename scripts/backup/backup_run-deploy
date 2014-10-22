@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Set the environment by loading from the file "environment" in the same directory
+DIR="$( cd "$( dirname "$0" )" && pwd)"
+
+while getopts "a:" arg
+do    
+    source $DIR/environment_$_OPTARG
+done
+
+if [ "$DEPLOY_KEY" == "" ]; then
+   # access by tediously typing a password over and again
+   rsync --chmod=ug=rwX -e ssh -axv --delete --exclude-from=$DIR/rsync-exclude \
+      $DEPLOY_SOURCE_DIR $DEPLOY_ACCOUNT@$DEPLOY_SERVER:$DEPLOY_DEST_DIR
+else
+   # access by key
+   rsync --chmod=ug=rwX -axv --delete --exclude-from=$DIR/rsync-exclude \
+      -e "ssh -i $DEPLOY_KEY" \
+      $DEPLOY_SOURCE_DIR $DEPLOY_ACCOUNT@$DEPLOY_SERVER:$DEPLOY_DEST_DIR
+fi
